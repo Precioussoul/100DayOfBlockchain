@@ -66,6 +66,8 @@ describe("Token", function() {
 
     describe('Approving Token', () => {
         let amount, transaction, result
+        const invalidAddress = "0x0000000000000000000000000000000000000000"; // Valid but commonly used invalid address
+
         beforeEach(async() => {
             amount = tokens(100)
             transaction = await token.connect(deployer).approve(exchange.address, amount)
@@ -78,12 +80,54 @@ describe("Token", function() {
 
                 expect(await token.allowance(deployer.address, exchange.address)).to.equal(amount)
             })
+
+            it("emits Approval event", async function() {
+                expect(result.events[0].event).to.equal("Approval")
+                expect(result.events[0].args.owner).to.equal(deployer.address)
+                expect(result.events[0].args.spender).to.equal(exchange.address)
+                expect(result.events[0].args.value).to.equal(amount)
+            })
         })
 
-        describe('Success', () => {
-
+        describe('Failure', () => {
+            it('rejects invalid spenders', async() => {
+                await expect(token.connect(deployer).approve(invalidAddress, amount)).to.be.reverted
+            })
         })
 
     })
+
+
+    describe('Delegated token transfer', () => {
+
+        let amount, transaction, result
+        const invalidAddress = "0x0000000000000000000000000000000000000000"; // Valid but commonly used invalid address
+
+        beforeEach(async() => {
+            amount = tokens(100)
+            transaction = await token.connect(deployer).approve(exchange.address, amount)
+            result = await transaction.wait()
+        })
+
+
+        describe('Success', () => {
+            beforeEach(async() => {
+                transaction = await token.connect(exchange).transferFrom(deployer.address, receiver.address, amount)
+                result = await transaction.wait()
+            })
+
+            it('transfer token', async() => {
+                expect(await token.balanceOf(deployer.address)).to.equal(tokens(99900))
+                expect(await token.balanceOf(receiver.address)).to.equal(amount)
+            })
+        })
+        describe('Failure', () => {
+            let invalidAmount = tokens(100000000)
+            it('rejects invalid amount', async() => {
+                await expect(token.connect(exchange).transferFrom(deployer.address, receiver.address, invalidAmount)).to.be.reverted
+            })
+        })
+    })
+
 
 })
