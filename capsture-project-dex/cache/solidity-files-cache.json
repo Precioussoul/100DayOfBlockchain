@@ -109,6 +109,43 @@
       "artifacts": [
         "Token"
       ]
+    },
+    "/home/sofiyullah/Desktop/GROWTH_SPACE🖥️💓️🤜️😎️/100DAYS_OF_BLOCKCHAIN 🔷️♦️/capsture-project-dex/contracts/Exchange.sol": {
+      "lastModificationDate": 1724589751959,
+      "contentHash": "b33dcade30d3a9ca6f1ccc23f8a1dad9",
+      "sourceName": "contracts/Exchange.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "hardhat/console.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Exchange"
+      ]
     }
   }
 }

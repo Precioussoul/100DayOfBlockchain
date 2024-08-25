@@ -6,34 +6,40 @@ const tokens = (n) => {
 }
 
 describe("Token", function() {
-    const name = "Ethereum"
-    const symbol = "ETH"
-    const totalSupply = tokens("100000")
-
-    let token, accounts, deployer
+    let token, accounts, deployer, receiver, exchange
 
     beforeEach(async() => {
         const Token = await ethers.getContractFactory("Token")
-        token = await Token.deploy("Ethereum", "ETH", 100000)
+        token = await Token.deploy("Dapp University Token", "DUT", 1000000)
         accounts = await ethers.getSigners()
         deployer = accounts[0]
         receiver = accounts[1]
         exchange = accounts[2]
     })
 
-    it("has correct name", async function() {
-        expect(await token.name()).to.equal(name)
-    })
-    it("has correct symbol", async function() {
-        expect(await token.symbol()).to.equal(symbol)
-    })
-    it("has correct totalSuply", async function() {
-        expect(await token.totalSupply()).to.equal(totalSupply)
-    })
-    it("has correct token balance", async function() {
-        expect(await token.balanceOf(deployer.address)).to.equal(totalSupply)
-    })
+    describe("Deployment", () => {
+        const name = "Dapp University Token"
+        const symbol = "DUT"
+        const decimal = 18
+        const totalSupply = tokens(1000000)
 
+        it("has correct name", async function() {
+            expect(await token.name()).to.equal(name)
+        })
+        it("has correct symbol", async function() {
+            expect(await token.symbol()).to.equal(symbol)
+        })
+        it("has correct decimals", async function() {
+            expect(await token.decimal()).to.equal(decimal)
+        })
+        it("has correct totalSuply", async function() {
+            expect(await token.totalSupply()).to.equal(totalSupply)
+        })
+        it("has correct token balance", async function() {
+            expect(await token.balanceOf(deployer.address)).to.equal(totalSupply)
+        })
+
+    })
     describe("Transfer", function() {
         let amount, transaction, result
         beforeEach(async() => {
@@ -43,7 +49,7 @@ describe("Token", function() {
         })
 
         it("transfer tokens", async function() {
-            expect(await token.balanceOf(deployer.address)).to.equal(tokens(99900))
+            expect(await token.balanceOf(deployer.address)).to.equal(tokens(999900))
             expect(await token.balanceOf(receiver.address)).to.equal(amount)
         })
 
@@ -117,7 +123,7 @@ describe("Token", function() {
             })
 
             it('transfer token', async() => {
-                expect(await token.balanceOf(deployer.address)).to.equal(tokens(99900))
+                expect(await token.balanceOf(deployer.address)).to.equal(tokens(999900))
                 expect(await token.balanceOf(receiver.address)).to.equal(amount)
             })
         })
