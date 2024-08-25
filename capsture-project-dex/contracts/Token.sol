@@ -52,7 +52,7 @@ contract Token {
     }
 
     function transferFrom(address _from, address _to , uint256 _value ) public  returns (bool success) {
-        
+        console.log(_from, _to, _value);
         require(balanceOf[_from] >= _value, "Insufficient balance");
         require(allowance[_from][msg.sender] >= _value, "Insufficient allowance");
  

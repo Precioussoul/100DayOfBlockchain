@@ -74,8 +74,8 @@
       ]
     },
     "/home/sofiyullah/Desktop/GROWTH_SPACE🖥️💓️🤜️😎️/100DAYS_OF_BLOCKCHAIN 🔷️♦️/capsture-project-dex/contracts/Token.sol": {
-      "lastModificationDate": 1722793538941,
-      "contentHash": "11066713a8b18d765b6f6fbfd14f753e",
+      "lastModificationDate": 1724592451691,
+      "contentHash": "1d8264cf28755973cec435ce4451d675",
       "sourceName": "contracts/Token.sol",
       "solcConfig": {
         "version": "0.8.4",
@@ -111,8 +111,8 @@
       ]
     },
     "/home/sofiyullah/Desktop/GROWTH_SPACE🖥️💓️🤜️😎️/100DAYS_OF_BLOCKCHAIN 🔷️♦️/capsture-project-dex/contracts/Exchange.sol": {
-      "lastModificationDate": 1724589751959,
-      "contentHash": "b33dcade30d3a9ca6f1ccc23f8a1dad9",
+      "lastModificationDate": 1724603414284,
+      "contentHash": "a05e4cde3d2aa282f550351fe00f0099",
       "sourceName": "contracts/Exchange.sol",
       "solcConfig": {
         "version": "0.8.4",
@@ -138,7 +138,8 @@
         }
       },
       "imports": [
-        "hardhat/console.sol"
+        "hardhat/console.sol",
+        "./Token.sol"
       ],
       "versionPragmas": [
         "^0.8.0"
